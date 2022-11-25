@@ -1,0 +1,518 @@
+openapi: 3.0.1
+info:
+  title: pei
+  description: Trabaho de PEI
+  version: '0.1'
+servers:
+  - url: http://localhost:8080
+paths:
+  /ping:
+    get:
+      summary: Sends a ping to the API
+      responses:
+        '200':
+          description: API is Working
+  /partners:
+    get:
+      summary: Gets all partners
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    post:
+      summary: Creates a new partner
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/partner'
+      responses:
+        '201':
+          description: Created Successfully
+        '409':
+          description: Already Exists
+        '500':
+          description: Validation/Server Error
+  /partners/{identifier}:
+    put:
+      summary: Updates/Creates a partner
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/partner'
+      responses:
+        '201':
+          description: Created Successfully
+        '204':
+          description: Updated Successfully
+        '500':
+          description: Validation/Server Error
+  /inspectors:
+    get:
+      summary: Gets all inspectors
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    post:
+      summary: Creates a new inspector
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/inspector'
+      responses:
+        '201':
+          description: Created Successfully
+        '409':
+          description: Already Exists
+        '500':
+          description: Validation/Server Error
+  /inspectors/{identifier}:
+    put:
+      summary: Update/Creates a inspector
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/inspector'
+      responses:
+        '201':
+          description: Created Successfully
+        '204':
+          description: Updated Successfully
+        '500':
+          description: Validation/Server Error
+  /appointments:
+    get:
+      summary: Gets all appointments
+      responses:
+        '200':
+          description: All OK
+        '404':
+          description: Not Found
+    post:
+      summary: Adds a new appointment
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema: 
+              $ref: '#/components/schemas/appointment'
+      responses:
+        '201':
+          description: Added Successfully
+        '409':
+          description: Already Exists
+        '500':
+          description: Validation/Server Error
+  /appointments/{identifier}:
+    put:
+      summary: Updates an appointment
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema: 
+              $ref: '#/components/schemas/appointment'
+      responses:
+        '201':
+          description: Created Successfully
+        '204':
+          description: Updated Successfully
+        '500':
+          description: Validation/Server Error
+  /appointments/today/inspector/{id}:
+    get:
+      summary: Gets all appointments for today for a specific inspector
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: All OK
+        '404':
+          description: Not Found
+  /inspections:
+    get:
+      summary: Gets all inspections
+      responses:
+        '200':
+          description: All OK
+        '404':
+          description: Not Found
+    post:
+      summary: Adds a new inspection
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema: 
+              $ref: '#/components/schemas/inspection'
+      responses:
+        '201':
+          description: Added Successfully
+        '409':
+          description: Already Exists
+        '500':
+          description: Validation Error
+  /inspections/{code}:
+    get:
+      summary: Gets an inspection by code
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: All OK
+        '404':
+          description: Not Found
+    put:
+      summary: Updates an inspection
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema: 
+              $ref: '#/components/schemas/inspection'
+      responses:
+        '201':
+          description: Created Successfully
+        '204':
+          description: Updated Successfully
+        '500':
+          description: Validation/Server Error
+  /inspections/date/{date}/partner/{partner}/realized/{realized}:
+    get:
+      summary: Gets all realized/not realized inspections from a specific date and partner
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: partner
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: realized
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: All OK
+        '404':
+          description: Not Found
+components:
+  schemas:
+    partner:
+      xml:
+        name: 'partner'
+        namespace: 'http://estg.ipp.pt/pei/trabalho/partner'
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Partner Identifier
+        name:
+          type: string
+          description: Partner Name
+        city:
+          type: string
+          description: Partner City
+    inspector:
+      xml:
+        name: 'inspector'
+        namespace: 'http://estg.ipp.pt/pei/trabalho/inspector'
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Inspector Identifier
+        partner:
+          type: string
+          description: Inspector Partner
+        name:
+          type: string
+          description: Inspector Name
+    appointment:
+      xml:
+        name: 'appointment'
+        namespace: 'http://estg.ipp.pt/pei/trabalho/appointment'
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Appointment Code
+        date:
+          type: string
+          format: date
+          description: Appointment Date
+        inspector:
+          type: string
+          description: Appointment Inspector
+        entity:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Entity Type
+              xml:
+                attribute: true
+            name:
+              type: string
+              description: Entity Name
+            owner:
+              type: string
+              description: Entity Owner
+        place:
+          type: object
+          properties:
+            city:
+              type: string
+              description: City
+            zip:
+              type: string
+              description: ZIP
+            street:
+              type: string
+              description: Street
+            number:
+              type: integer
+              description: Door number
+            latitude:
+              type: number
+              description: Latitude
+              format: float
+            longitude:
+              type: number
+              description: Longitude
+              format: float
+        vehicle:
+          type: object
+          properties:
+            brand:
+              type: string
+              description: Vehicle Brand
+            model:
+              type: string
+              description: Vehicle Model
+            fuel:
+              type: string
+              description: Vehicle Fuel
+            transmission:
+              type: string
+              description: Vehicle Transmission
+            year:
+              type: integer
+              description: Vehicle Year
+            horsepower:
+              type: integer
+              description: Vehicle Horsepower
+    inspection:
+      xml:
+        name: 'inspection'
+        namespace: 'http://estg.ipp.pt/pei/trabalho/inspection'
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Inspection Code
+        date:
+          type: string
+          format: date
+          description: Inspection Date
+        partner:
+          type: string
+          description: Inspection Partner
+        inspector:
+          type: string
+          description: Inspection Inspector
+        state:
+          type: object
+          properties:
+            realized:
+              type: string
+              description: Inspection State
+              xml:
+                attribute: true
+            category:
+              type: string
+              description: Inspection Category
+            explanation:
+              type: string
+              description: Inspection Explanation
+        start:
+          type: string
+          format: time
+          description: Inspection Start
+        end:
+          type: string
+          format: time
+          description: Inspection End
+        entity:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Entity Type
+              xml:
+                attribute: true
+            name:
+              type: string
+              description: Entity Name
+            owner:
+              type: string
+              description: Entity Owner
+        battery:
+          type: object
+          properties:
+            normal:
+              type: string
+              description: Battery Normal
+              xml:
+                attribute: true
+            state:
+              type: string
+              description: Battery State
+        transmissionOil:
+          properties:
+              normal:
+                type: string
+                description: Transmission Oil Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Transmission Oil State 
+        transmissionEngine:
+          properties:
+              normal:
+                type: string
+                description: Transmission Engine Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Transmission Engine State 
+        refrigerationSystem:
+          properties:
+              normal:
+                type: string
+                description: Refrigeration System Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Refrigeration System State
+        engineSupport:
+          properties:
+              normal:
+                type: string
+                description: Engine Support Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Engine Support State
+        engineNoise:
+          properties:
+              normal:
+                type: string
+                description: Engine Noise Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Engine Noise State
+        gases:
+          type: object
+          properties:
+            normal:
+              type: string
+              description: Gases Normal
+              xml:
+                attribute: true
+            state:
+              type: string
+              description: Gases State
+        gearbox:
+          properties:
+              normal:
+                type: string
+                description: Gearbox Normal
+                xml:
+                  attribute: true
+          type: array
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: Gearbox State
+        quilometers:
+          type: integer
+          description: Quilometers

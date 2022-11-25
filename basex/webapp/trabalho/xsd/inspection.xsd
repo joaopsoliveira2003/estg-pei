@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://estg.ipp.pt/pei/trabalho/inspection" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://estg.ipp.pt/pei/trabalho/inspection" elementFormDefault="qualified">
+    <xs:annotation>
+        <xs:appinfo>
+            NCar Inspection
+        </xs:appinfo>
+        <xs:documentation>
+            This schema defines a inspection
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="inspection">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="code" type="xs:positiveInteger">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Code</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="date" type="xs:date">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Date</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="partner" type="nonEmptyString">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Partner Associate</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="inspector" type="nonEmptyString">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Inspector Associate</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="state">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's State</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="category" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Inaccessible Location"/>
+                                        <xs:enumeration value="Missing Vehicle"/>
+                                        <xs:enumeration value="Other"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="explanation" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="400"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="realized" use="required" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="start" type="xs:time">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Start Time</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="end" type="xs:time">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's End Time</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="entity" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Entity</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="nonEmptyString"/>
+                            <xs:element name="owner" type="YesNoType" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="type" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Client"/>
+                                    <xs:enumeration value="Mechanic"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="battery" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Battery</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="1">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Weak"/>
+                                        <xs:enumeration value="Not Working"/>
+                                        <xs:enumeration value="Jump Start"/>
+                                        <xs:enumeration value="Discharging Light Glowing"/>
+                                        <xs:enumeration value="Intermittent Functioning"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transmissionOil" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Transmission Oil</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Dirty"/>
+                                        <xs:enumeration value="Leakage from Side Cover"/>
+                                        <xs:enumeration value="Leakage from Sump/Chamber"/>
+                                        <xs:enumeration value="Leakage from Tappet Cover"/>
+                                        <xs:enumeration value="Leakage from Turbo Charger"/>
+                                        <xs:enumeration value="Leaking"/>
+                                        <xs:enumeration value="Level Low"/>
+                                        <xs:enumeration value="Low Pressure Warning Light Glowing"/>
+                                        <xs:enumeration value="Mixed with Coolant"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="transmissionEngine" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Transmission Engine</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Car not Working on Petrol"/>
+                                        <xs:enumeration value="Fuel Leakage From Injector"/>
+                                        <xs:enumeration value="MIL Light Glowing"/>
+                                        <xs:enumeration value="Misfiring"/>
+                                        <xs:enumeration value="Not Converting to CNG"/>
+                                        <xs:enumeration value="Over Heating"/>
+                                        <xs:enumeration value="RPM Fluctuating"/>
+                                        <xs:enumeration value="RPM Not Increasing"/>
+                                        <xs:enumeration value="Repaired"/>
+                                        <xs:enumeration value="Seized"/>
+                                        <xs:enumeration value="Sump Damaged"/>
+                                        <xs:enumeration value="Turbo Charger not Working"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="refrigerationSystem" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Refrigeration System</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Dirty"/>
+                                        <xs:enumeration value="Leaking"/>
+                                        <xs:enumeration value="Mixed with Engine Oil"/>
+                                        <xs:enumeration value="Radiator Damaged"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="engineSupport" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Engine Support</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Broken"/>
+                                        <xs:enumeration value="Excess Vibration"/>
+                                        <xs:enumeration value="Loose"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="engineNoise" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Engine Noise</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Alternator Brg Noise"/>
+                                        <xs:enumeration value="Engine Auxiliary Noise"/>
+                                        <xs:enumeration value="Injector Noise"/>
+                                        <xs:enumeration value="Tappet Noise"/>
+                                        <xs:enumeration value="Timing Noise"/>
+                                        <xs:enumeration value="Water Pump Brg Noise"/>
+                                        <xs:enumeration value="Whistling Noise-Turbo"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="gases" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Gases</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="1">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Black"/>
+                                        <xs:enumeration value="Blue"/>
+                                        <xs:enumeration value="Leakage from Manifold"/>
+                                        <xs:enumeration value="Noise from Silencer Assembly"/>
+                                        <xs:enumeration value="Silencer Assembly Damaged"/>
+                                        <xs:enumeration value="White"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="gearbox" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Gearbox</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Auto Transmission Not Satisfactory"/>
+                                        <xs:enumeration value="Bearing Noise"/>
+                                        <xs:enumeration value="Burning"/>
+                                        <xs:enumeration value="Hard"/>
+                                        <xs:enumeration value="Low Pick Up"/>
+                                        <xs:enumeration value="Slip"/>
+                                        <xs:enumeration value="Spongy"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="normal" type="YesNoType"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="quilometers" type="xs:positiveInteger" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Inspection's Vehicle Quilometers</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="YesNoType">
+        <xs:annotation>
+            <xs:documentation>Yes No Type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="No"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="nonEmptyString">
+        <xs:annotation>
+            <xs:documentation>Non empty string</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

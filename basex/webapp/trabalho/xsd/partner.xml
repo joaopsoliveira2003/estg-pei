@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<partner xmlns="http://estg.ipp.pt/pei/trabalho/partner" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://estg.ipp.pt/pei/trabalho/partner partner.xsd">
+    <identifier>P1</identifier>
+    <name>Centro 1</name>
+    <city>Amarante</city>
+</partner>

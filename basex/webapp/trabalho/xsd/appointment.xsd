@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://estg.ipp.pt/pei/trabalho/appointment" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://estg.ipp.pt/pei/trabalho/appointment" elementFormDefault="qualified">
+    <xs:annotation>
+        <xs:appinfo>
+            NCar Appointment
+        </xs:appinfo>
+        <xs:documentation>
+            This schema defines a appointment
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="appointment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="code" type="xs:positiveInteger">
+                    <xs:annotation>
+                        <xs:documentation>Appointment's Code</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="date" type="xs:date">
+                    <xs:annotation>
+                        <xs:documentation>Appointment's Date</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="inspector" type="nonEmptyString">
+                    <xs:annotation>
+                        <xs:documentation>Inspector Identifier Associate Appointment</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="entity">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="nonEmptyString"/>
+                            <xs:element name="owner" type="YesNoType" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="type" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Client"/>
+                                    <xs:enumeration value="Mechanic"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="place">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="city" type="nonEmptyString">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's City</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="zip">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                        <xs:documentation>Appointment's ZIP</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[1-9][0-9]{3}-[0-9]{3}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="street" type="nonEmptyString">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Street</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="number" type="xs:positiveInteger">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Number</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="latitude" type="xs:decimal" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Latitude</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="longitude" type="xs:decimal" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Longitude</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="vehicle">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="brand" type="nonEmptyString">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle Brand</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>                                
+                            <xs:element name="model" type="nonEmptyString">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle Model</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="fuel">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle Fuel</xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Diesel"/>
+                                        <xs:enumeration value="Gasoline"/>
+                                        <xs:enumeration value="Eletric/Gasoline"/>
+                                        <xs:enumeration value="Electric"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="transmission">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle Transmission</xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Auto"/>
+                                        <xs:enumeration value="Manual"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="year" type="xs:positiveInteger">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle Year</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="horsepower" type="xs:positiveInteger">
+                                <xs:annotation>
+                                    <xs:documentation>Appointment's Vehicle HorsePower</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="nonEmptyString">
+        <xs:annotation>
+            <xs:documentation>Non empty string</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="YesNoType">
+        <xs:annotation>
+            <xs:documentation>Yes No Type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="No"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

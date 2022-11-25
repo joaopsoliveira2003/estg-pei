@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appointment xmlns="http://estg.ipp.pt/pei/trabalho/appointment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://estg.ipp.pt/pei/trabalho/appointment appointment.xsd">
+    <code>1</code>
+    <date>2019-01-01</date>
+    <inspector>I1</inspector>
+    <entity type="Client">
+        <name>Pedro</name>
+        <owner>Yes</owner>
+    </entity>
+    <place>
+        <city>Porto</city>
+        <zip>4200-072</zip>
+        <street>Rua da Boavista</street>
+        <number>123</number>
+        <latitude>41.1558</latitude>
+        <longitude>-8.6291</longitude>
+    </place>
+    <vehicle>
+        <brand>Audi</brand>
+        <model>A4</model>
+        <fuel>Eletric/Gasoline</fuel>
+        <transmission>Auto</transmission>
+        <year>2010</year>
+        <horsepower>200</horsepower>
+    </vehicle>
+</appointment>

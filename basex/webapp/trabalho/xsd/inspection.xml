@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inspection xmlns="http://estg.ipp.pt/pei/trabalho/inspection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://estg.ipp.pt/pei/trabalho/inspection inspection.xsd">
+    <code>2</code>
+    <date>2019-01-02</date>
+    <partner>P2</partner>
+    <inspector>I3</inspector>
+    <state realized="Yes"/>
+    <start>10:50:00</start>
+    <end>11:59:00</end>
+    <entity type="Client">
+        <name>Pedro</name>
+        <owner>Yes</owner>
+    </entity>
+    <battery normal="No">
+        <state>Weak</state>
+    </battery>
+    <transmissionOil normal="No">
+        <state>Dirty</state>
+    </transmissionOil>
+    <transmissionEngine normal="No">
+        <state>Repaired</state>
+    </transmissionEngine>
+    <refrigerationSystem normal="No">
+        <state>Dirty</state>
+    </refrigerationSystem>
+    <engineSupport normal="No">
+        <state>Broken</state>
+    </engineSupport>
+    <engineNoise normal="No">
+        <state>Alternator Brg Noise</state>
+    </engineNoise>
+    <gases normal="No">
+        <state>Black</state>
+    </gases>
+    <gearbox normal="No">
+        <state>Hard</state>
+    </gearbox>
+    <quilometers>10</quilometers>
+</inspection>

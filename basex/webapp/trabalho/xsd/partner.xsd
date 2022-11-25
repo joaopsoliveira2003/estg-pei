@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://estg.ipp.pt/pei/trabalho/partner" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://estg.ipp.pt/pei/trabalho/partner" elementFormDefault="qualified">
+    <xs:annotation>
+        <xs:appinfo>
+            NCar Partner
+        </xs:appinfo>
+        <xs:documentation>
+            This schema defines a partner
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="partner">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="identifier" type="nonEmptyString">
+                    <xs:annotation>
+                        <xs:documentation>Partner's Identifier</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="name" type="nonEmptyString"> 
+                    <xs:annotation>
+                        <xs:documentation>Partner's Name</xs:documentation>
+                    </xs:annotation>
+                </xs:element>            
+                <xs:element name="city" type="nonEmptyString">
+                    <xs:annotation>
+                        <xs:documentation>Partner's City</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="nonEmptyString">
+        <xs:annotation>
+            <xs:documentation>Non empty string</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

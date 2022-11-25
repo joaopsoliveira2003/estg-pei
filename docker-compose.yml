@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  basexhttp:
+    build: .
+    image: basex:10.3
+    container_name: basex
+    ports:
+      - "1984:1984"
+      - "8080:8080"
+    volumes:
+      - ./basex/data:/home/basex/data
+      - ./basex/webapp:/home/basex/webapp
